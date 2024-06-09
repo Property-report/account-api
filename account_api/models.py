@@ -18,6 +18,9 @@ class Report(db.Model):
     latitude = db.Column(db.String(300))
     longitude = db.Column(db.String(300))
     uprn = db.Column(db.String(300))
+    headingvaluefound = db.Column(db.String(300))
+    headervalue = db.Column(db.String(300))
+
     creation_status = db.Column(db.String(64), default='pending')
     creation_start = db.Column(db.DateTime, nullable=True)
     report_data_stored = db.Column(db.Boolean, default=False)
@@ -40,6 +43,8 @@ class Report(db.Model):
             "latitude": self.latitude,
             "longitude": self.longitude,
             "uprn": self.uprn,
+            "headingvaluefound": self.headingvaluefound,
+            "headervalue": self.headervalue,
             "payment_status": self.get_payment_status(),
             "creation_status": self.creation_status,
             "creation_start": self.creation_start,
@@ -70,7 +75,9 @@ class Report(db.Model):
             postcode=data.get('postcode'),
             latitude=data.get('latitude'),
             longitude=data.get('longitude'),
-            uprn=data.get('uprn')
+            uprn=data.get('uprn'),
+            headingvaluefound=data.get('headingvaluefound'),
+            headervalue=data.get('headervalue'),
         )
         report.save()
         return report
